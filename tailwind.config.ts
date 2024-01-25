@@ -73,6 +73,10 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    fontFamily: {
+      sans: ['var(--font-geist-sans)', 'sans-serif'], // Geist Variable for sans-serif
+      mono: ['var(--font-jetbrains-mono)', 'monospace'], // JetBrains Mono for monospace
+  },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config

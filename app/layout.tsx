@@ -1,4 +1,6 @@
 import dynamic from "next/dynamic";
+import { PrismicPreview } from "@prismicio/next";
+import { repositoryName } from "@/prismicio";
 import { draftMode } from "next/headers";
 import { token } from "@/lib/sanity.fetch";
 import { client } from "@/lib/utils/sanity/client";
@@ -32,13 +34,9 @@ export default async function RootLayout({
       lang="en"
       className={`${GeistSans.variable} ${jetbrainsMono.variable}`}
     >
-
       <body>
-        {draftMode().isEnabled ? (
-          <PreviewProvider token={token}>{children}</PreviewProvider>
-        ) : (
-          children
-        )}
+        {children}
+        <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
   );

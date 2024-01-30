@@ -1,0 +1,146 @@
+[
+  {
+    "id": 1,
+    "name": "Models",
+    "uid": "item-1",
+    "subNavigation": [
+      {
+        "id": 1,
+        "name": "KM3000",
+        "link": "@/KM3000",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      },
+      {
+        "id": 2,
+        "name": "KM4000",
+        "link": "@/KM4000",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      },
+      {
+        "id": 3,
+        "name": "KM5000",
+        "link": "@/KM5000",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      },
+      {
+        "id": 4,
+        "name": "KM75",
+        "link": "@/KM75",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Technology",
+    "uid": "item-2",
+    "subNavigation": [
+      {
+        "id": 1,
+        "name": "Child Item 1 for Technology",
+        "link": "Link for Child Item 1",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Ownership",
+    "uid": "item-3",
+    "subNavigation": [
+      {
+        "id": 1,
+        "name": "KM3000",
+        "link": "Link for Child Item 1",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Discover",
+    "uid": "item-4",
+    "subNavigation": [
+      {
+        "id": 1,
+        "name": "Child Item 1 for Discover",
+        "link": "Link for Child Item 1",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Media Center",
+    "uid": "item-5",
+    "subNavigation": [
+      {
+        "id": 1,
+        "name": "Child Item 1 for Models",
+        "link": "Link for Child Item 1",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Support",
+    "uid": "item-6",
+    "subNavigation": [
+      {
+        "id": 1,
+        "name": "Child Item 1 for Models",
+        "link": "Link for Child Item 1",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Giveaway",
+    "uid": "item-7",
+    "subNavigation": [
+      {
+        "id": 1,
+        "name": "Child Item 1 for Models",
+        "link": "Link for Child Item 1",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Ambassador",
+    "uid": "item-8",
+    "subNavigation": [
+      {
+        "id": 1,
+        "name": "Child Item 1 for Models",
+        "link": "Link for Child Item 1",
+        "isImage": false,
+        "isLarge": false,
+        "isSmall": true
+      }
+    ]
+  }
+]

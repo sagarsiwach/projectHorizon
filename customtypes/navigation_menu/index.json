@@ -1,0 +1,86 @@
+{
+  "id": "navigation_menu",
+  "label": "Navigation Menu",
+  "format": "custom",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "number": {
+        "type": "Number",
+        "config": {
+          "label": "Number",
+          "placeholder": ""
+        }
+      },
+      "uid": {
+        "type": "Text",
+        "config": {
+          "label": "UID",
+          "placeholder": ""
+        }
+      },
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "Name",
+          "placeholder": ""
+        }
+      },
+      "type": {
+        "type": "Select",
+        "config": {
+          "label": "Type",
+          "placeholder": "",
+          "options": ["Single", "Multiple"]
+        }
+      },
+      "child_navigation": {
+        "type": "Group",
+        "config": {
+          "label": "Child Navigation",
+          "repeat": true,
+          "fields": {
+            "number": {
+              "type": "Number",
+              "config": {
+                "label": "Number",
+                "placeholder": ""
+              }
+            },
+            "type": {
+              "type": "Select",
+              "config": {
+                "label": "Type",
+                "placeholder": "",
+                "options": ["Image", "Large Text", "Small Text"]
+              }
+            },
+            "name": {
+              "type": "Text",
+              "config": {
+                "label": "Name",
+                "placeholder": ""
+              }
+            },
+            "link": {
+              "type": "Text",
+              "config": {
+                "label": "Link",
+                "placeholder": ""
+              }
+            },
+            "image": {
+              "type": "Image",
+              "config": {
+                "label": "Image",
+                "constraint": {},
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

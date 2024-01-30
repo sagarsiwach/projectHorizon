@@ -1,64 +1,71 @@
+"use-client";
 import * as Accordion from "@radix-ui/react-accordion";
 import React from "react";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { motion, AnimatePresence } from "framer-motion";
 
-const MobileDrawerNavigationItem = () => {
+const MobileDrawerNavigationItem = ({ data }) => {
+  console.log(data);
+  const variants = {
+    initial: {
+      opacity: 0,
+      y: -10,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+        staggerChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -10,
+    },
+  };
+
   return (
     <Accordion.Root
       type="single"
-      defaultValue="item-1"
+      defaultValue={data[0].uid}
       collapsible
       className="flex flex-col space-y-2"
     >
-      <Accordion.Item
-        value="item-1"
-        className="w-full p-4 flex-col space-y-4 bg-neutral-100 rounded-[4px] shadow"
-      >
-        <Accordion.Trigger className="flex flex-row items-center justify-between w-full">
-          <p className=" font-mono uppercase font-neutral-700">Models</p>
-          <svg
-            className="h-4 w-4 fill-neutral-500"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-          >
-            <path d="M8 10.2497L4 6.24974L4.93333 5.31641L8 8.38307L11.0667 5.31641L12 6.24974L8 10.2497Z" />
-          </svg>
-        </Accordion.Trigger>
-        <Accordion.Content className="text-3xl tracking-[-1px] font-medium text-neutral-700 flex flex-col space-y-4">
-          <hr className="border-[0.5px] border-neutral-400 w-full" />
-          <div className="flex flex-col space-y-2">
-            <p>KM3000</p>
-            <p>KM4000</p>
-            <p>KM5000</p>
-            <p>KM75</p>
-            <p>Project Hermes</p>
-          </div>
-        </Accordion.Content>
-      </Accordion.Item>
-      <Accordion.Item
-        value="item-2"
-        className="w-full p-4 flex-col space-y-4 bg-neutral-100 rounded-[4px] shadow"
-      >
-        <Accordion.Trigger className="flex flex-row items-center justify-between w-full">
-          <p className=" font-mono uppercase font-neutral-700">Technology</p>
-          <svg
-            className="h-4 w-4 fill-neutral-500"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-          >
-            <path d="M8 10.2497L4 6.24974L4.93333 5.31641L8 8.38307L11.0667 5.31641L12 6.24974L8 10.2497Z" />
-          </svg>
-        </Accordion.Trigger>
-        <Accordion.Content className="text-3xl tracking-[-1px] font-medium text-neutral-700 flex flex-col space-y-4">
-          <hr className="border-[0.5px] border-neutral-400 w-full" />
-          <div className="flex flex-col space-y-2">
-            <p>KM3000</p>
-            <p>KM4000</p>
-            <p>KM5000</p>
-            <p>KM75</p>
-            <p>Project Hermes</p>
-          </div>
-        </Accordion.Content>
-      </Accordion.Item>
+      {console.log(data.subNavigation)}
+      {data.map(({ uid, id, name, subNavigation }) => (
+        <Accordion.Item
+          key={id}
+          value={uid}
+          className="w-full pt-4 pb-2 px-2 flex-col space-y-4 bg-neutral-100 rounded-[4px] shadow"
+        >
+          <Accordion.Header>
+            <Accordion.Trigger className="flex flex-row items-center justify-between w-full group px-1">
+              <p className=" font-mono uppercase font-neutral-700">{name}</p>
+              <ChevronDownIcon
+                className="transition-transform duration-300 ease-in-out group-data-[state=open]:rotate-180"
+                aria-hidden
+              />
+            </Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content className="data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown">
+            <AnimatePresence>
+              <motion.div
+                variants={variants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                className="flex flex-col space-y-2 *:h-[160px] *:bg-white *:p-6 *:flex *:flex-row *:text-2xl *:items-center *:tracking-[-0.96px] *:text-neutral-700 *:font-medium *:transition *:rounded-[4px]"
+              >
+                <motion.p variants={variants}>KM3000</motion.p>
+                <motion.p variants={variants}>KM4000</motion.p>
+                <motion.p variants={variants}>KM5000</motion.p>
+                <motion.p variants={variants}>KM75</motion.p>
+              </motion.div>
+            </AnimatePresence>
+          </Accordion.Content>
+        </Accordion.Item>
+      ))}
     </Accordion.Root>
   );
 };

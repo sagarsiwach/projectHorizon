@@ -29,7 +29,7 @@ const MobileDrawerNavigationItem = ({ data }) => {
       type="single"
       defaultValue={data[0].uid}
       collapsible
-      className="flex flex-col space-y-2"
+      className="flex flex-col space-y-2 overflow-auto"
     >
       {data.map(({ uid, id, name, type, subNavigation }) => (
         <Accordion.Item

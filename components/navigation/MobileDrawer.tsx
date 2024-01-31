@@ -2,7 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { motion } from "framer-motion";
 import * as Accordion from "@radix-ui/react-accordion";
 import React from "react";
-import TestRideButton from "./TestRideButton";
+import TestRideButton from "./TestRideButtonMobile";
 import KMLogoMobile from "./KMLogoMobile";
 import MobileDrawerNavigationItem from "./MobileDrawerNavigationItem";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
@@ -12,8 +12,8 @@ const MobileDrawer = () => {
   return (
     <>
       <Dialog.Root>
-        <Dialog.Trigger asChild className="cursor-pointer">
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 curson-pointer">
+        <Dialog.Trigger asChild className="cursor-pointer md:hidden">
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -33,7 +33,7 @@ const MobileDrawer = () => {
         </Dialog.Trigger>
 
         <Dialog.Portal>
-          <Dialog.Content>
+          <Dialog.Content className="bg-white">
             <motion.div
               className="absolute h-dvh w-dvh inset-0 bg-white flex flex-col space-y-2 px-4"
               layout

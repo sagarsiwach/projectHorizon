@@ -1,4 +1,3 @@
-"use-client";
 import * as Accordion from "@radix-ui/react-accordion";
 import React from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
@@ -15,8 +14,8 @@ const MobileDrawerNavigationItem = ({ data }) => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3,
-        staggerChildren: 0.1,
+        duration: 0.5,
+        staggerChildren: 0.2,
       },
     },
     exit: {
@@ -32,38 +31,80 @@ const MobileDrawerNavigationItem = ({ data }) => {
       collapsible
       className="flex flex-col space-y-2"
     >
-      {console.log(data.subNavigation)}
-      {data.map(({ uid, id, name, subNavigation }) => (
+      {data.map(({ uid, id, name, type, subNavigation }) => (
         <Accordion.Item
           key={id}
           value={uid}
           className="w-full pt-4 pb-2 px-2 flex-col space-y-4 bg-neutral-100 rounded-[4px] shadow"
         >
-          <Accordion.Header>
-            <Accordion.Trigger className="flex flex-row items-center justify-between w-full group px-1">
-              <p className=" font-mono uppercase font-neutral-700">{name}</p>
+          {type === "multiple" ? (
+            <>
+              <Accordion.Header>
+                <Accordion.Trigger className="flex flex-row items-center justify-between w-full group px-1">
+                  <p className="font-mono uppercase font-neutral-700">{name}</p>
+                  <ChevronDownIcon
+                    className="transition-transform duration-300 ease-in-out group-data-[state=open]:rotate-180"
+                    aria-hidden
+                  />
+                </Accordion.Trigger>
+              </Accordion.Header>
+              <Accordion.Content className="data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown">
+                <AnimatePresence>
+                  <motion.div
+                    variants={variants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    className="flex flex-col space-y-2"
+                  >
+                    {subNavigation.map(({ id, name, type, image }) => {
+                      if (type === "small") {
+                        return (
+                          <motion.p
+                            key={id}
+                            variants={variants}
+                            className="text-2xl"
+                          >
+                            {name}
+                          </motion.p>
+                        );
+                      } else if (type === "large") {
+                        return (
+                          <motion.p
+                            key={id}
+                            variants={variants}
+                            className="text-2xl tracking-[-0.96px] text-neutral-700 font-medium"
+                          >
+                            {name}
+                          </motion.p>
+                        );
+                      } else {
+                        return (
+                          type === "image" && (
+                            <motion.div
+                              key={id}
+                              variants={variants}
+                              className="h-[160px] bg-white p-6 flex flex-row text-2xl items-center tracking-[-0.96px] text-neutral-700 font-medium transition rounded-[4px]"
+                            >
+                              <p>{name}</p>
+                            </motion.div>
+                          )
+                        );
+                      }
+                    })}
+                  </motion.div>
+                </AnimatePresence>
+              </Accordion.Content>
+            </>
+          ) : (
+            <Accordion.Header className="flex flex-row items-center justify-between w-full group px-1">
+              <p className="font-mono uppercase font-neutral-700">{name}</p>
               <ChevronDownIcon
-                className="transition-transform duration-300 ease-in-out group-data-[state=open]:rotate-180"
+                className="transition-transform duration-300 ease-in-out -rotate-90"
                 aria-hidden
               />
-            </Accordion.Trigger>
-          </Accordion.Header>
-          <Accordion.Content className="data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown">
-            <AnimatePresence>
-              <motion.div
-                variants={variants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                className="flex flex-col space-y-2 *:h-[160px] *:bg-white *:p-6 *:flex *:flex-row *:text-2xl *:items-center *:tracking-[-0.96px] *:text-neutral-700 *:font-medium *:transition *:rounded-[4px]"
-              >
-                <motion.p variants={variants}>KM3000</motion.p>
-                <motion.p variants={variants}>KM4000</motion.p>
-                <motion.p variants={variants}>KM5000</motion.p>
-                <motion.p variants={variants}>KM75</motion.p>
-              </motion.div>
-            </AnimatePresence>
-          </Accordion.Content>
+            </Accordion.Header>
+          )}
         </Accordion.Item>
       ))}
     </Accordion.Root>

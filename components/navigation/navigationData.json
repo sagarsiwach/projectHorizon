@@ -3,38 +3,31 @@
     "id": 1,
     "name": "Models",
     "uid": "item-1",
+    "type": "multiple",
     "subNavigation": [
       {
         "id": 1,
         "name": "KM3000",
         "link": "@/KM3000",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
+        "type": "image"
       },
       {
         "id": 2,
         "name": "KM4000",
         "link": "@/KM4000",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
+        "type": "image"
       },
       {
         "id": 3,
         "name": "KM5000",
         "link": "@/KM5000",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
+        "type": "image"
       },
       {
         "id": 4,
         "name": "KM75",
         "link": "@/KM75",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
+        "type": "image"
       }
     ]
   },
@@ -42,14 +35,43 @@
     "id": 2,
     "name": "Technology",
     "uid": "item-2",
+    "type": "multiple",
     "subNavigation": [
       {
         "id": 1,
-        "name": "Child Item 1 for Technology",
-        "link": "Link for Child Item 1",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
+        "name": "Powertrain",
+        "link": "Link for Powertrain",
+        "type": "large"
+      },
+      {
+        "id": 2,
+        "name": "Battery",
+        "link": "Link for Battery",
+        "type": "large"
+      },
+      {
+        "id": 3,
+        "name": "Charging",
+        "link": "Link for Charging",
+        "type": "large"
+      },
+      {
+        "id": 4,
+        "name": "Connectivity",
+        "link": "Link for Connectivity",
+        "type": "large"
+      },
+      {
+        "id": 5,
+        "name": "Mobile App",
+        "link": "Link for Mobile App",
+        "type": "large"
+      },
+      {
+        "id": 6,
+        "name": "Safety",
+        "link": "Link for Safety",
+        "type": "large"
       }
     ]
   },
@@ -57,14 +79,43 @@
     "id": 3,
     "name": "Ownership",
     "uid": "item-3",
+    "type": "multiple",
     "subNavigation": [
       {
         "id": 1,
-        "name": "KM3000",
-        "link": "Link for Child Item 1",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
+        "name": "Ownership",
+        "link": "Link for Ownership",
+        "type": "large"
+      },
+      {
+        "id": 2,
+        "name": "Battery Care+",
+        "link": "Link for Battery Care+",
+        "type": "large"
+      },
+      {
+        "id": 3,
+        "name": "Service",
+        "link": "Link for Service",
+        "type": "large"
+      },
+      {
+        "id": 4,
+        "name": "Customers",
+        "link": "Link for Customers",
+        "type": "large"
+      },
+      {
+        "id": 5,
+        "name": "Locate a Store",
+        "link": "Link for Locate a Store",
+        "type": "large"
+      },
+      {
+        "id": 6,
+        "name": "Become a Partner",
+        "link": "Link for Become a Partner",
+        "type": "large"
       }
     ]
   },
@@ -72,14 +123,31 @@
     "id": 4,
     "name": "Discover",
     "uid": "item-4",
+    "type": "multiple",
     "subNavigation": [
       {
         "id": 1,
-        "name": "Child Item 1 for Discover",
-        "link": "Link for Child Item 1",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
+        "name": "Company",
+        "link": "Link for Company",
+        "type": "large"
+      },
+      {
+        "id": 2,
+        "name": "Investors",
+        "link": "Link for Investors",
+        "type": "large"
+      },
+      {
+        "id": 3,
+        "name": "Blog",
+        "link": "Link for Blog",
+        "type": "large"
+      },
+      {
+        "id": 4,
+        "name": "Careers",
+        "link": "Link for Careers",
+        "type": "large"
       }
     ]
   },
@@ -87,60 +155,28 @@
     "id": 5,
     "name": "Media Center",
     "uid": "item-5",
-    "subNavigation": [
-      {
-        "id": 1,
-        "name": "Child Item 1 for Models",
-        "link": "Link for Child Item 1",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
-      }
-    ]
+    "type": "single",
+    "subNavigation": []
   },
   {
     "id": 6,
     "name": "Support",
     "uid": "item-6",
-    "subNavigation": [
-      {
-        "id": 1,
-        "name": "Child Item 1 for Models",
-        "link": "Link for Child Item 1",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
-      }
-    ]
+    "type": "single",
+    "subNavigation": []
   },
   {
     "id": 7,
     "name": "Giveaway",
     "uid": "item-7",
-    "subNavigation": [
-      {
-        "id": 1,
-        "name": "Child Item 1 for Models",
-        "link": "Link for Child Item 1",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
-      }
-    ]
+    "type": "single",
+    "subNavigation": []
   },
   {
     "id": 8,
     "name": "Ambassador",
     "uid": "item-8",
-    "subNavigation": [
-      {
-        "id": 1,
-        "name": "Child Item 1 for Models",
-        "link": "Link for Child Item 1",
-        "isImage": false,
-        "isLarge": false,
-        "isSmall": true
-      }
-    ]
+    "type": "single",
+    "subNavigation": []
   }
 ]

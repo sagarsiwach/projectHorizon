@@ -1,9 +1,4 @@
 import dynamic from "next/dynamic";
-import { PrismicPreview } from "@prismicio/next";
-import { repositoryName } from "@/prismicio";
-import { draftMode } from "next/headers";
-import { token } from "@/lib/sanity.fetch";
-import { client } from "@/lib/utils/sanity/client";
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
@@ -34,10 +29,7 @@ export default async function RootLayout({
       lang="en"
       className={`${GeistSans.variable} ${jetbrainsMono.variable}`}
     >
-      <body>
-        {children}
-        <PrismicPreview repositoryName={repositoryName} />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

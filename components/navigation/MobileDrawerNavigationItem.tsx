@@ -2,8 +2,9 @@ import * as Accordion from "@radix-ui/react-accordion";
 import React from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
-const MobileDrawerNavigationItem = ({ data }) => {
+const MobileDrawerNavigationItem = ({ data, defaultAccValue }) => {
   console.log(data);
   const variants = {
     initial: {
@@ -27,11 +28,11 @@ const MobileDrawerNavigationItem = ({ data }) => {
   return (
     <Accordion.Root
       type="single"
-      defaultValue={data[0].uid}
+      defaultValue={defaultAccValue}
       collapsible
       className="flex flex-col space-y-2 overflow-auto"
     >
-      {data.map(({ uid, id, name, type, subNavigation }) => (
+      {data.map(({ uid, id, name, type, link, subNavigation }) => (
         <Accordion.Item
           key={id}
           value={uid}
@@ -57,7 +58,7 @@ const MobileDrawerNavigationItem = ({ data }) => {
                     exit="exit"
                     className="flex flex-col space-y-2"
                   >
-                    {subNavigation.map(({ id, name, type, image }) => {
+                    {subNavigation.map(({ id, name, type, image, link }) => {
                       if (type === "small") {
                         return (
                           <motion.p
@@ -65,7 +66,7 @@ const MobileDrawerNavigationItem = ({ data }) => {
                             variants={variants}
                             className="text-2xl"
                           >
-                            {name}
+                            <Link href={link}>{name}</Link>
                           </motion.p>
                         );
                       } else if (type === "large") {
@@ -86,7 +87,7 @@ const MobileDrawerNavigationItem = ({ data }) => {
                               variants={variants}
                               className="h-[160px] bg-white p-6 flex flex-row text-2xl items-center tracking-[-0.96px] text-neutral-700 font-medium transition rounded-[4px]"
                             >
-                              <p>{name}</p>
+                              <Link href={link}>{name}</Link>
                             </motion.div>
                           )
                         );
@@ -98,7 +99,9 @@ const MobileDrawerNavigationItem = ({ data }) => {
             </>
           ) : (
             <Accordion.Header className="flex flex-row items-center justify-between w-full group px-1">
-              <p className="font-mono uppercase font-neutral-700">{name}</p>
+              <Link href={link}>
+                <p className="font-mono uppercase font-neutral-700">{name}</p>
+              </Link>
               <ChevronDownIcon
                 className="transition-transform duration-300 ease-in-out -rotate-90"
                 aria-hidden

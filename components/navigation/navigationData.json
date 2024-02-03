@@ -8,25 +8,25 @@
       {
         "id": 1,
         "name": "KM3000",
-        "link": "@/KM3000",
+        "link": "/KM3000",
         "type": "image"
       },
       {
         "id": 2,
         "name": "KM4000",
-        "link": "@/KM4000",
+        "link": "/KM4000",
         "type": "image"
       },
       {
         "id": 3,
         "name": "KM5000",
-        "link": "@/KM5000",
+        "link": "/KM5000",
         "type": "image"
       },
       {
         "id": 4,
         "name": "KM75",
-        "link": "@/KM75",
+        "link": "/KM75",
         "type": "image"
       }
     ]
@@ -40,37 +40,37 @@
       {
         "id": 1,
         "name": "Powertrain",
-        "link": "Link for Powertrain",
+        "link": "/technology/powertrain",
         "type": "large"
       },
       {
         "id": 2,
         "name": "Battery",
-        "link": "Link for Battery",
+        "link": "/technology/battery",
         "type": "large"
       },
       {
         "id": 3,
         "name": "Charging",
-        "link": "Link for Charging",
+        "link": "/technology/charging",
         "type": "large"
       },
       {
         "id": 4,
         "name": "Connectivity",
-        "link": "Link for Connectivity",
+        "link": "/technology/connectivity",
         "type": "large"
       },
       {
         "id": 5,
         "name": "Mobile App",
-        "link": "Link for Mobile App",
+        "link": "/technology/app",
         "type": "large"
       },
       {
         "id": 6,
         "name": "Safety",
-        "link": "Link for Safety",
+        "link": "/technology/safety",
         "type": "large"
       }
     ]
@@ -83,38 +83,38 @@
     "subNavigation": [
       {
         "id": 1,
-        "name": "Ownership",
-        "link": "Link for Ownership",
+        "name": "Experience",
+        "link": "/ownership/experience",
         "type": "large"
       },
       {
         "id": 2,
         "name": "Battery Care+",
-        "link": "Link for Battery Care+",
+        "link": "/ownership/battery",
         "type": "large"
       },
       {
         "id": 3,
         "name": "Service",
-        "link": "Link for Service",
+        "link": "/ownership/service",
         "type": "large"
       },
       {
         "id": 4,
         "name": "Customers",
-        "link": "Link for Customers",
+        "link": "/customers",
         "type": "large"
       },
       {
         "id": 5,
         "name": "Locate a Store",
-        "link": "Link for Locate a Store",
+        "link": "/store-locator",
         "type": "large"
       },
       {
         "id": 6,
         "name": "Become a Partner",
-        "link": "Link for Become a Partner",
+        "link": "/partners",
         "type": "large"
       }
     ]
@@ -128,25 +128,25 @@
       {
         "id": 1,
         "name": "Company",
-        "link": "Link for Company",
+        "link": "/company",
         "type": "large"
       },
       {
         "id": 2,
         "name": "Investors",
-        "link": "Link for Investors",
+        "link": "/investors",
         "type": "large"
       },
       {
         "id": 3,
         "name": "Blog",
-        "link": "Link for Blog",
+        "link": "https://medium.com/kabiramobility",
         "type": "large"
       },
       {
         "id": 4,
         "name": "Careers",
-        "link": "Link for Careers",
+        "link": "/careers",
         "type": "large"
       }
     ]
@@ -156,6 +156,7 @@
     "name": "Media Center",
     "uid": "item-5",
     "type": "single",
+    "link": "/media-center",
     "subNavigation": []
   },
   {
@@ -163,6 +164,7 @@
     "name": "Support",
     "uid": "item-6",
     "type": "single",
+    "link": "/support",
     "subNavigation": []
   },
   {
@@ -170,6 +172,7 @@
     "name": "Giveaway",
     "uid": "item-7",
     "type": "single",
+    "link": "/ambassador/giveaway",
     "subNavigation": []
   },
   {
@@ -177,6 +180,7 @@
     "name": "Ambassador",
     "uid": "item-8",
     "type": "single",
+    "link": "/ambassador",
     "subNavigation": []
   }
 ]

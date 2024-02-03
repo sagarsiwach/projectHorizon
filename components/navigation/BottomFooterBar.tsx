@@ -25,14 +25,14 @@ export default function BottomFooterBar() {
           variant="link"
           className="px-[8px] py-[12px] flex flex-row space-x-1 rounded-[2px] text-white hover:text-neutral-300 hover:cursor-pointer"
         >
-          <Link href="/" className="text-[14px] font-mono uppercase">
+          <Link href="/" className="group text-[14px] font-mono uppercase">
             Dealers
           </Link>
           <svg
             width="20"
             height="20"
             viewBox="0 0 20 20"
-            className="fill-white hover:fill-neutral-300"
+            className="fill-white group-hover:fill-neutral-300"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M10.0032 9.77565C10.3742 9.77565 10.6908 9.64356 10.9531 9.37937C11.2154 9.11519 11.3465 8.79762 11.3465 8.42665C11.3465 8.05567 11.2144 7.73905 10.9503 7.47677C10.6861 7.21448 10.3685 7.08333 9.99754 7.08333C9.62657 7.08333 9.30993 7.21542 9.04764 7.4796C8.78537 7.74377 8.65423 8.06135 8.65423 8.43233C8.65423 8.80331 8.78631 9.11993 9.05048 9.38221C9.31466 9.6445 9.63223 9.77565 10.0032 9.77565ZM10.0004 17.516C8.04204 15.7842 6.56688 14.1691 5.57489 12.6707C4.58291 11.1723 4.08691 9.80876 4.08691 8.58013C4.08691 6.81731 4.6609 5.36324 5.80887 4.21794C6.95683 3.07265 8.354 2.5 10.0004 2.5C11.6467 2.5 13.0439 3.07265 14.1919 4.21794C15.3398 5.36324 15.9138 6.81731 15.9138 8.58013C15.9138 9.80876 15.4178 11.1723 14.4259 12.6707C13.4339 14.1691 11.9587 15.7842 10.0004 17.516Z" />

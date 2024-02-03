@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import * as Accordion from "@radix-ui/react-accordion";
 import React from "react";
 import TestRideButton from "./TestRideButtonMobile";
-import KMLogoMobile from "./KMLogoMobile";
+import KMLogoMobile from "./KMLogo";
 import MobileDrawerNavigationItem from "./MobileDrawerNavigationItem";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import navigationHeader from "./navigationData.json"; // Import the JSON data
@@ -60,7 +60,10 @@ const MobileDrawer = () => {
                   <hr className="w-full border-1 border-neutral-300" />
                 </div>
               </div>
-              <MobileDrawerNavigationItem data={navigationHeader} />
+              <MobileDrawerNavigationItem
+                defaultAccValue={navigationHeader[0].id}
+                data={navigationHeader}
+              />
             </motion.div>
           </Dialog.Content>
         </Dialog.Portal>

@@ -57,10 +57,7 @@ export default function DesktopDrawer({}) {
                 </svg>
               </Dialog.Close>
             </div>
-            <MobileDrawerNavigationItem
-              defaultValue={navigationHeader[0].id}
-              data={navigationHeader}
-            />
+            <MobileDrawerNavigationItem defaultValue={navigationHeader[0].id} />
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>

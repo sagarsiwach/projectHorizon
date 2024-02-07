@@ -2,10 +2,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import MobileDrawer from "./MobileDrawer";
 import TestRideButton from "./TestRideButtonMobile";
-import KMLogoMobile from "./KMLogo";
 import BottomFooterBar from "./BottomFooterBar";
 import DesktopProductBar from "./DesktopProductBar";
 import DesktopDrawer from "./DesktopDrawer";
+import KMLogo from "./KMLogo";
 
 export default function Navigation() {
   return (
@@ -13,7 +13,7 @@ export default function Navigation() {
       <div>
         <div className="flex flex-col px-4 w-dvw">
           <div className="flex flex-row justify-between w-full items-center relative  py-4">
-            <KMLogoMobile device={"mobile"} />
+            <KMLogo />
             <MobileDrawer />
             <DesktopProductBar />
             <DesktopDrawer />

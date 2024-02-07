@@ -3,9 +3,10 @@ import React from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { getNavigation } from "@/sanity/sanity-utils";
 
-const MobileDrawerNavigationItem = ({ data, defaultAccValue }) => {
-  console.log(data);
+export default async function MobileDrawerNavigationItem({ defaultAccValue }) {
+  const navigation = await getNavigation();
   const variants = {
     initial: {
       opacity: 0,
@@ -32,7 +33,7 @@ const MobileDrawerNavigationItem = ({ data, defaultAccValue }) => {
       collapsible
       className="flex flex-col space-y-2 overflow-auto"
     >
-      {data.map(({ uid, id, name, type, link, subNavigation }) => (
+      {navigation.map(({ uid, id, name, type, link, subNavigation }) => (
         <Accordion.Item
           key={id}
           value={uid}
@@ -112,6 +113,4 @@ const MobileDrawerNavigationItem = ({ data, defaultAccValue }) => {
       ))}
     </Accordion.Root>
   );
-};
-
-export default MobileDrawerNavigationItem;
+}

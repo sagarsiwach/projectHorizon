@@ -5,10 +5,11 @@ import React from "react";
 import TestRideButton from "./TestRideButtonMobile";
 import KMLogoMobile from "./KMLogo";
 import MobileDrawerNavigationItem from "./MobileDrawerNavigationItem";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
-import navigationHeader from "./navigationData.json"; // Import the JSON data
+import { getNavigation } from "@/sanity/sanity-utils";
 
-const MobileDrawer = () => {
+export default async function MobileDrawer() {
+  const navigation = await getNavigation();
+
   return (
     <>
       <Dialog.Root>
@@ -60,16 +61,11 @@ const MobileDrawer = () => {
                   <hr className="w-full border-1 border-neutral-300" />
                 </div>
               </div>
-              <MobileDrawerNavigationItem
-                defaultAccValue={navigationHeader[0].id}
-                data={navigationHeader}
-              />
+              <MobileDrawerNavigationItem defaultAccValue={navigation[0].id} />
             </motion.div>
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
     </>
   );
-};
-
-export default MobileDrawer;
+}

@@ -1,3 +1,4 @@
+import footerSchema from "./footer";
 import navigationSchema from "./navigation";
 
-export const schemaTypes = [navigationSchema];
+export const schemaTypes = [navigationSchema, footerSchema];

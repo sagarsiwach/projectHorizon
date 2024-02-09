@@ -3,9 +3,9 @@ import { defineType, defineField, defineArrayMember } from "sanity";
 const footerSchema = defineType({
   name: "Footer",
   type: "document",
-  title: "Comprehensive Footer Configuration",
+  title: "Footer",
   description:
-    "Defines the structure for the website's footer, encapsulating social media links, navigational elements, and company information in a unified layout. Intended for a single instance to maintain consistency across the website.",
+    "Defines the website's footer structure. Encapsulates social media links, navigation components, and corporate information for presentation in a unified layout. This schema is intended for a single instance to maintain site-wide footer consistency.",
   options: {
     single: true,
   },
@@ -23,7 +23,7 @@ const footerSchema = defineType({
       type: "string",
       title: "Footer Title",
       description:
-        "Primary title for the footer, summarizing the content below.",
+        "The primary title displayed within the footer section, summarizing the content below.",
       group: "corporateDetails",
     }),
     defineField({
@@ -31,38 +31,38 @@ const footerSchema = defineType({
       type: "object",
       title: "Social Media Links",
       description:
-        "Direct links to social media platforms for engaging with the company's online presence.",
+        "Provides direct links to the company's social media profiles, facilitating online engagement.",
       group: "socialMediaConnections",
       fields: [
         defineField({
           name: "facebookUrl",
           type: "url",
           title: "Facebook URL",
-          description: "Direct URL to the company's Facebook page.",
+          description: "The complete URL of the company's Facebook page.",
         }),
         defineField({
           name: "xUrl",
           type: "url",
           title: "X (formerly Twitter) URL",
-          description: "Direct URL to the company's X profile.",
+          description: "The complete URL of the company's X profile.",
         }),
         defineField({
           name: "instagramUrl",
           type: "url",
           title: "Instagram URL",
-          description: "Direct URL to the company's Instagram profile.",
+          description: "The complete URL of the company's Instagram profile.",
         }),
         defineField({
           name: "linkedinUrl",
           type: "url",
           title: "LinkedIn URL",
-          description: "Direct URL to the company's LinkedIn page.",
+          description: "The complete URL of the company's LinkedIn page.",
         }),
         defineField({
           name: "youtubeUrl",
           type: "url",
           title: "YouTube URL",
-          description: "Direct URL to the company's YouTube channel.",
+          description: "The complete URL of the company's YouTube channel.",
         }),
       ],
     }),
@@ -71,7 +71,7 @@ const footerSchema = defineType({
       type: "array",
       title: "Footer Navigation Links",
       description:
-        "Organized list of links for navigating the website, grouped by main headings and sub-links.",
+        "An organized list of internal website links presented in the footer. Links are grouped into main headings with optional sub-links.",
       group: "navigationalLinksInformation",
       of: [
         defineArrayMember({
@@ -81,20 +81,21 @@ const footerSchema = defineType({
               name: "id",
               type: "number",
               title: "ID",
-              description: "Unique identifier for each navigational item.",
+              description:
+                "A unique numerical identifier for each navigation item.",
             }),
             defineField({
               name: "heading",
               type: "string",
               title: "Heading Name",
-              description: "Name of the main navigation heading.",
+              description: "The name of the primary navigation heading.",
             }),
             defineField({
               name: "subNavigationLinks",
               type: "array",
               title: "Sub-navigation Links",
               description:
-                "Collection of links under a specific navigation heading.",
+                "A collection of links associated with a specific navigation heading.",
               of: [
                 defineArrayMember({
                   type: "object",
@@ -104,21 +105,21 @@ const footerSchema = defineType({
                       type: "number",
                       title: "ID",
                       description:
-                        "Unique identifier for each sub-navigation item.",
+                        "A unique numerical identifier for each sub-navigation item.",
                     }),
                     defineField({
                       name: "name",
                       type: "string",
                       title: "Link Name",
                       description:
-                        "Descriptive name of the sub-navigation link.",
+                        "The descriptive name displayed for the sub-navigation link.",
                     }),
                     defineField({
                       name: "url",
                       type: "slug",
                       title: "Navigation URL",
                       description:
-                        "URL slug pointing to the specific page or section.",
+                        "The URL slug identifying the internal page or section.",
                     }),
                   ],
                 }),
@@ -133,14 +134,14 @@ const footerSchema = defineType({
       type: "object",
       title: "Company Information",
       description:
-        "Detailed information about the company, including contact details and a brief description.",
+        "Detailed company information, including contact details and a brief description.",
       group: "corporateDetails",
       fields: [
         defineField({
           name: "companyName",
           type: "string",
           title: "Company Name",
-          description: "Official name of the company.",
+          description: "The official name of the company.",
         }),
         defineField({
           name: "description",
@@ -154,32 +155,33 @@ const footerSchema = defineType({
           name: "telephoneTitle",
           type: "string",
           title: "Telephone Title",
-          description: "Label for the company's telephone contact information.",
+          description:
+            "A label for the company's telephone contact information.",
         }),
         defineField({
           name: "telephoneNumber",
           type: "string",
           title: "Telephone Number",
-          description: "Primary contact telephone number for the company.",
+          description: "The primary telephone number for the company.",
         }),
         defineField({
           name: "emailTitle",
           type: "string",
           title: "E-Mail Title",
-          description: "Label for the company's email contact information.",
+          description: "A label for the company's email contact information.",
         }),
         defineField({
           name: "emailAddress",
           type: "string",
           title: "E-Mail Address",
-          description: "Primary contact email address for the company.",
+          description: "The primary email address for the company.",
         }),
         defineField({
           name: "bottomLineText",
           type: "string",
           title: "Bottom Line Text",
           description:
-            "Final statement or copyright notice displayed in the footer.",
+            "A final statement or copyright notice displayed at the very bottom of the footer.",
         }),
       ],
     }),

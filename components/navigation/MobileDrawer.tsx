@@ -7,9 +7,7 @@ import KMLogoMobile from "./KMLogo";
 import MobileDrawerNavigationItem from "./MobileDrawerNavigationItem";
 import { getNavigation } from "@/sanity/sanity-utils";
 
-export default async function MobileDrawer() {
-  const navigation = await getNavigation();
-
+export default function MobileDrawer() {
   return (
     <>
       <Dialog.Root>
@@ -61,7 +59,7 @@ export default async function MobileDrawer() {
                   <hr className="w-full border-1 border-neutral-300" />
                 </div>
               </div>
-              <MobileDrawerNavigationItem defaultAccValue={navigation[0].id} />
+              <MobileDrawerNavigationItem defaultAccValue="item-1" />
             </motion.div>
           </Dialog.Content>
         </Dialog.Portal>

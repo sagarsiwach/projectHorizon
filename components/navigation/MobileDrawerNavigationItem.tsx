@@ -6,7 +6,7 @@ import Link from "next/link";
 import { getNavigation } from "@/sanity/sanity-utils";
 
 export default async function MobileDrawerNavigationItem({ defaultAccValue }) {
-  const navigation = await getNavigation();
+  // const navigation = await getNavigation();
   const variants = {
     initial: {
       opacity: 0,

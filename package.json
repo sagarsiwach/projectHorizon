@@ -10,12 +10,16 @@
     "slicemachine": "start-slicemachine"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.4",
     "@portabletext/react": "^3.0.11",
     "@prisma/client": "^5.8.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-radio-group": "^1.1.3",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.5",
     "@sanity/client": "^6.11.3",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.26.0",
@@ -31,13 +35,15 @@
     "next-sanity": "^7.0.17",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.50.1",
     "resend": "^3.0.0",
     "sanity": "^3.27.1",
     "server-only": "^0.0.1",
     "suspend-react": "^0.1.3",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
-    "vaul": "^0.8.9"
+    "vaul": "^0.8.9",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@slicemachine/adapter-next": "^0.3.34",

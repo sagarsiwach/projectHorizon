@@ -21,16 +21,19 @@ const testRideData = [
 
 // Updated schema to include the 'type' field
 const FormSchema = z.object({
-  model: z.enum(
-    testRideData.map((data) => data.value),
-    {
-      required_error: "You need to select a Model",
-    }
-  ),
+  model: z.enum([testRideData.map((data) => data.value)], {
+    required_error: "You need to select a Model",
+  }),
   location: z.string().length(6, "Pincode must be 6 digits"),
+  city: z.string().min(1, "City name is required").optional(),
+  state: z.string().min(1, "State name is required").optional(),
   name: z.string().min(2).max(40, "Name must be between 2 and 40 characters"),
   email: z.string().email("Must be a valid email"),
   mobile: z.string().length(10, "Mobile number must be 10 digits"),
+  referralCode: z
+    .string()
+    .length(6, "Referral code must be 6 digits")
+    .optional(),
 });
 
 export default function TestRideForm() {

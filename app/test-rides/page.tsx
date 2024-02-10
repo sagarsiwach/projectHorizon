@@ -6,8 +6,6 @@ import Ribbon from "@/components/navigation/Ribbon";
 export default function HomePage() {
   return (
     <div>
-      <Ribbon />
-      <Navigation />
       <TestRideForm />
     </div>
   );

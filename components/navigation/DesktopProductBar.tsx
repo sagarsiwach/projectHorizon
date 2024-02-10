@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
-import navigationHeader from "./navigationData.json"; // Import the JSON data
 import { Button } from "../ui/button";
 import Link from "next/link";
 
-export default function DesktopProductBar() {
+export default function DesktopProductBar({ data }) {
   return (
     <ul className="hidden md:flex flex-row space-x-1 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      {navigationHeader[0].subNavigation.map(({ id, name, link }) => (
+      {data[0].subNavigation.map(({ id, name, link }) => (
         <Button
           asChild
           key={id}

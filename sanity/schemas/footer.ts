@@ -115,7 +115,7 @@ const footerSchema = defineType({
                         "The descriptive name displayed for the sub-navigation link.",
                     }),
                     defineField({
-                      name: "url",
+                      name: "link",
                       type: "slug",
                       title: "Navigation URL",
                       description:
@@ -149,8 +149,29 @@ const footerSchema = defineType({
           title: "Company Descriptions",
           description:
             "Brief descriptions highlighting the company's mission, values, or services.",
-          of: [{ type: "string" }],
+          of: [
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({
+                  name: "title",
+                  type: "string",
+                  title: "Title",
+                  description:
+                    "The title for the description, summarizing the key point.",
+                }),
+                defineField({
+                  name: "description",
+                  type: "text", // Use 'text' for longer descriptions or 'string' for shorter ones
+                  title: "Description",
+                  description:
+                    "The detailed description elaborating on the title.",
+                }),
+              ],
+            }),
+          ],
         }),
+
         defineField({
           name: "telephoneTitle",
           type: "string",

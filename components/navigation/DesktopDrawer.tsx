@@ -4,7 +4,7 @@ import navigationHeader from "./navigationData.json"; // Import the JSON data
 import * as Dialog from "@radix-ui/react-dialog";
 import KMLogoMobile from "./KMLogo";
 import MobileDrawerNavigationItem from "./MobileDrawerNavigationItem";
-export default function DesktopDrawer({}) {
+export default function DesktopDrawer({ data }) {
   return (
     <div className="md:flex flex-row space-x-2 hidden">
       <Button className="inline-flex items-center rounded-[4px] bg-white hover:bg-flamingo-600 active:bg-flamingo-700 cursor-pointer px-[8px] py-[4px] text-white fill-white">
@@ -57,7 +57,7 @@ export default function DesktopDrawer({}) {
                 </svg>
               </Dialog.Close>
             </div>
-            <MobileDrawerNavigationItem defaultValue={navigationHeader[0].id} />
+            <MobileDrawerNavigationItem defaultAccValue={null} data={data} />
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>

@@ -5,9 +5,8 @@ import React from "react";
 import TestRideButton from "./TestRideButtonMobile";
 import KMLogoMobile from "./KMLogo";
 import MobileDrawerNavigationItem from "./MobileDrawerNavigationItem";
-import { getNavigation } from "@/sanity/sanity-utils";
 
-export default function MobileDrawer() {
+export default function MobileDrawer({ data }) {
   return (
     <>
       <Dialog.Root>
@@ -59,7 +58,10 @@ export default function MobileDrawer() {
                   <hr className="w-full border-1 border-neutral-300" />
                 </div>
               </div>
-              <MobileDrawerNavigationItem defaultAccValue="item-1" />
+              <MobileDrawerNavigationItem
+                defaultAccValue={data[0].uid}
+                data={data}
+              />
             </motion.div>
           </Dialog.Content>
         </Dialog.Portal>

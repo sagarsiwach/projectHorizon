@@ -20,7 +20,6 @@ export default function Navigation({ navigation }) {
             <TestRideButton />
           </div>
           <div>
-            {" "}
             <hr
               className="w-full border-1 border-neutral-300
       "

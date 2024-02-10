@@ -11,9 +11,7 @@ export default function FooterNavigation({ data }) {
           <ul>
             {item.subNavigationLinks.map((subItem) => (
               <li className="text-[14px] text-neutral-500" key={subItem.id}>
-                <Link href={subItem.link}>
-                  <p>{subItem.name}</p>
-                </Link>
+                <p>{subItem.name}</p>
               </li>
             ))}
           </ul>

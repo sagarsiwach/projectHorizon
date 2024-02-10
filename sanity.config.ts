@@ -6,7 +6,6 @@ import { schemaTypes } from "./sanity/schemas/index";
 const config = defineConfig({
   name: "default",
   title: "projectHorizonCms",
-
   projectId: "7n9s8rfi",
   dataset: "deployment",
   apiVersion: "2024-02-07",

@@ -1,11 +1,11 @@
 export default function FooterCompanyInformation({ data }) {
   return (
     <>
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-2">
         <h5 className="text-base text-white">
           {data.companyInformation.companyName}
         </h5>
-        <ul className="text-white flex flex-col space-y-[6px] select-auto">
+        <ul className="text-white flex flex-col lg:grid grid-cols-3 gap-y-[6px] gap-x-[6px] select-auto">
           {data.companyInformation.description.map((data) => (
             <li key={data._key}>
               <p className="text-[14px] font-semibold text-neutral-400">
@@ -35,7 +35,7 @@ export default function FooterCompanyInformation({ data }) {
             </li>
           </ul>
         </div>
-        <p className="text-[12px] text-neutral-400">
+        <p className="text-[12px] text-neutral-400 w-full text-center">
           {data.companyInformation.bottomLineText}
         </p>
       </div>

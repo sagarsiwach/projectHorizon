@@ -116,7 +116,7 @@ const footerSchema = defineType({
                     }),
                     defineField({
                       name: "link",
-                      type: "slug",
+                      type: "string",
                       title: "Navigation URL",
                       description:
                         "The URL slug identifying the internal page or section.",

@@ -40,55 +40,20 @@ async function getNavigation() {
 `;
 
   const data = await client.fetch(query);
-  {
-    next: {
-      revalidate: 5; // look for updates to revalidate cache every hour
-    }
-  }
+
   return data;
 }
 
 async function getFooter() {
   const query = `
-  *[_type == "Footer"]{
-  footerTitle,
-  "socialMediaLinks": socialMediaLinks{
-    facebookUrl,
-    xUrl,
-    instagramUrl,
-    linkedinUrl,
-    youtubeUrl
-  },
-  "navigationLinks": navigationLinks[]{
-    id,
-    heading,
-    "subNavigationLinks": subNavigationLinks[]{
-      id,
-      name,
-      "link": link.current,
-    }
-  },
-  "companyInformation": companyInformation{
-    companyName,
-    description,
-    telephoneTitle,
-    telephoneNumber,
-    emailTitle,
-    emailAddress,
-    bottomLineText
-  }
-}
+  *[_type == "Footer"]{...}
 
 
 
 `;
 
   const data = await client.fetch(query);
-  {
-    next: {
-      revalidate: 5; // look for updates to revalidate cache every hour
-    }
-  }
+
   return data;
 }
 

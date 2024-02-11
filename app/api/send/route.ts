@@ -16,6 +16,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       from: "Kabira Mobility <no-reply@kabiramobility.com>",
       to: [toEmail],
       reply_to: ["info@kabiramobility.com"],
+      bcc: ["website@km-crm1.odoo.com"],
       subject: "Thank you for Registering for Test Rides",
       react: TestRideEmail({
         model,

@@ -1,6 +1,5 @@
 import {
   Body,
-  Button,
   Container,
   Head,
   Heading,
@@ -13,10 +12,6 @@ import {
   Text,
 } from "@react-email/components";
 import * as React from "react";
-
-const baseUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "";
 
 export const TestRideEmail = ({
   model,
@@ -32,7 +27,7 @@ export const TestRideEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src="/static/kmLogo.png"
+          src="https://ik.imagekit.io/kabiramobility/km-logo_FCABHRJgN.png?updatedAt=1707631320148"
           width="258"
           height="56"
           alt="Kabira Mobility"
@@ -70,8 +65,8 @@ export const TestRideEmail = ({
         </Section>
         <Hr style={hr} />
         <Text style={footerText}>©Kabira Mobility Private Limited</Text>
-        <Link href="https://linear.app" style={reportLink}>
-          Linear
+        <Link href="https://kabiramobility.com/privacy" style={reportLink}>
+          Privacy Policy
         </Link>
       </Container>
     </Body>
@@ -119,40 +114,16 @@ const footerText = {
   lineHeight: "1.4",
   color: "#aaaaaa",
 };
+const reportLink = {
+  fontSize: "14px",
+  color: "#bbbbbb",
+};
 
 const buttonContainer = {
   padding: "27px 0 27px",
 };
 
-const button = {
-  backgroundColor: "#5e6ad2",
-  borderRadius: "3px",
-  fontWeight: "600",
-  color: "#fff",
-  fontSize: "15px",
-  textDecoration: "none",
-  textAlign: "center" as const,
-  display: "block",
-  padding: "11px 23px",
-};
-
-const reportLink = {
-  fontSize: "14px",
-  color: "#b4becc",
-};
-
 const hr = {
   borderColor: "#dfe1e4",
   margin: "42px 0 26px",
-};
-
-const code = {
-  fontFamily: "monospace",
-  fontWeight: "700",
-  padding: "1px 4px",
-  backgroundColor: "#dfe1e4",
-  letterSpacing: "-0.3px",
-  fontSize: "21px",
-  borderRadius: "4px",
-  color: "#3c4149",
 };

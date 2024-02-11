@@ -21,10 +21,10 @@ const testRideData = [
 
 // Updated schema to include the 'type' field
 const FormSchema = z.object({
-  model: z.enum([testRideData.map((data) => data.value)], {
+  model: z.enum([...testRideData.map((data) => data.value)], {
     required_error: "You need to select a Model",
   }),
-  location: z.string().length(6, "Pincode must be 6 digits"),
+  location: z.string().length(6, "Pincode must be 6 digits").optional(),
   city: z.string().min(1, "City name is required").optional(),
   state: z.string().min(1, "State name is required").optional(),
   name: z.string().min(2).max(40, "Name must be between 2 and 40 characters"),

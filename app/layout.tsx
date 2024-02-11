@@ -5,7 +5,6 @@ import "./globals.css";
 import Ribbon from "@/components/navigation/Ribbon";
 import Navigation from "@/components/navigation/Navigation";
 import { Toaster } from "@/components/ui/toaster";
-import { client } from "../../sanity/lib/client";
 import FooterBar from "@/components/navigation/footer";
 import { getNavigation, getFooter } from "@/sanity/lib/query";
 

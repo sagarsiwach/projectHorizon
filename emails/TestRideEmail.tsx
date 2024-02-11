@@ -13,6 +13,10 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
+const baseUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "";
+
 export const TestRideEmail = ({
   model,
   location,
@@ -27,7 +31,7 @@ export const TestRideEmail = ({
     <Body style={main}>
       <Container style={container}>
         <Img
-          src="https://ik.imagekit.io/kabiramobility/km-logo_FCABHRJgN.png?updatedAt=1707631320148"
+          src={`${baseUrl}/static/km-logo.png`}
           width="258"
           height="56"
           alt="Kabira Mobility"

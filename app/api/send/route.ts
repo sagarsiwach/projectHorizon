@@ -1,6 +1,6 @@
 import { render } from "@react-email/render";
 import { Resend } from "resend";
-import TestRideEmail from "@/app/_emails/TestRideEmail";
+import TestRideEmail from "@/emails/TestRideEmail";
 import dotenv from "dotenv";
 import { NextRequest, NextResponse } from "next/server";
 dotenv.config(); // Load environment variables from .env file
@@ -8,7 +8,8 @@ dotenv.config(); // Load environment variables from .env file
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  const { name, toEmail } = await req.json();
+  const { model, location, email, mobile, referralCode, name, toEmail } =
+    await req.json();
 
   try {
     const data = await resend.emails.send({
@@ -16,7 +17,14 @@ export async function POST(req: NextRequest, res: NextResponse) {
       to: [toEmail],
       reply_to: ["info@kabiramobility.com"],
       subject: "Thank you for Registering for Test Rides",
-      react: TestRideEmail({ name }),
+      react: TestRideEmail({
+        model,
+        location,
+        email,
+        name,
+        mobile,
+        referralCode,
+      }),
     });
 
     return Response.json({ message: "Message sent successfully", data });

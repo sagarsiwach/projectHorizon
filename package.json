@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "email-dev": "email dev --dir ./app/_emails --port 3500",
+    "email-dev": "email dev --dir ./emails --port 3300",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -40,7 +40,7 @@
     "next-sanity": "^7.0.17",
     "react": "^18",
     "react-dom": "^18",
-    "react-email": "1.9.0",
+    "react-email": "2.0.0",
     "react-hook-form": "^7.50.1",
     "resend": "^3.0.0",
     "sanity": "^3.27.1",

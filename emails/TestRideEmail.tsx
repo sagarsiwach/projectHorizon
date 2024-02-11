@@ -18,33 +18,58 @@ const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "";
 
-export const TestRideEmail = ({ name = "Sagar Siwach" }) => (
+export const TestRideEmail = ({
+  model,
+  location,
+  email,
+  name,
+  mobile,
+  referralCode,
+}) => (
   <Html>
     <Head />
     <Preview>Thank you for Registering your Test Ride</Preview>
     <Body style={main}>
       <Container style={container}>
         <Img
-          src={`${baseUrl}/static/linear-logo.png`}
-          width="42"
-          height="42"
-          alt="Linear"
+          src="/static/kmLogo.png"
+          width="258"
+          height="56"
+          alt="Kabira Mobility"
           style={logo}
         />
         <Heading style={heading}>
           Thank you for registering for test ride
         </Heading>
         <Section style={buttonContainer}>
-          <Button style={button} href="https://kabiramobility.com">
-            Login to Linear
-          </Button>
+          <Text style={paragraph}>Hey, {name}!</Text>
+          <Text style={paragraph}>
+            Thank you for registering for the test ride. Someone from our team,
+            will get in touch with you Shortly to coordinate for a Test Ride.
+          </Text>
         </Section>
-        <Text style={paragraph}>
-          This link and code will only be valid for the next 5 minutes. If the
-          link does not work, you can use the login verification code directly:
-        </Text>
-        <text style={paragraph}>Name: {name}</text>
+        <Section style={buttonContainer}>
+          <Text style={paragraph}>
+            <b>Name:</b> {name}
+          </Text>
+          <Text style={paragraph}>
+            <b>Model:</b> {model}
+          </Text>
+          <Text style={paragraph}>
+            <b>Pincode:</b> {location}
+          </Text>
+          <Text style={paragraph}>
+            <b>E-Mail:</b> {email}
+          </Text>
+          <Text style={paragraph}>
+            <b>Mobile Number:</b> {mobile}
+          </Text>
+          <Text style={paragraph}>
+            <b>Referral Code:</b> {referralCode}
+          </Text>
+        </Section>
         <Hr style={hr} />
+        <Text style={footerText}>©Kabira Mobility Private Limited</Text>
         <Link href="https://linear.app" style={reportLink}>
           Linear
         </Link>
@@ -57,8 +82,8 @@ export default TestRideEmail;
 
 const logo = {
   borderRadius: 21,
-  width: 42,
-  height: 42,
+  width: 184,
+  height: 40,
 };
 
 const main = {
@@ -87,6 +112,12 @@ const paragraph = {
   fontSize: "15px",
   lineHeight: "1.4",
   color: "#3c4149",
+};
+const footerText = {
+  margin: "0 0 15px",
+  fontSize: "14px",
+  lineHeight: "1.4",
+  color: "#aaaaaa",
 };
 
 const buttonContainer = {

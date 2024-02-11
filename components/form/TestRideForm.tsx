@@ -5,6 +5,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
+import { useSearchParams } from "next/navigation";
 import {
   Form,
   FormControl,
@@ -35,6 +36,10 @@ const FormSchema = z.object({
 });
 
 export default function TestRideForm() {
+  const searchParams = useSearchParams();
+  const referralCode = searchParams.get("referralCode");
+  // console.log(referralCode);
+
   const { toast } = useToast();
 
   const form = useForm({
@@ -45,19 +50,62 @@ export default function TestRideForm() {
       name: "",
       email: "",
       mobile: "",
+      referralCode: referralCode || "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "Form Submission",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>{" "}
-        </pre>
-      ),
-    });
-  }
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      const formEndpoint = "/api/form/";
+      const formResponse = await fetch(formEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!formResponse.ok) {
+        const errorData = await formResponse.json();
+        throw new Error(
+          errorData.message || "Failed to submit test ride request"
+        );
+      }
+
+      // // Assuming the second API call depends on the success of the first
+      // const sendEndpoint = "/api/send/";
+      // const sendPayload = {
+      //   model: data.model,
+      //   location: data.location,
+      //   email: data.email,
+      //   mobile: data.mobile,
+      //   referralCode: data.referralCode,
+      //   name: data.name,
+      //   toEmail: data.email, // Assuming the user's email is the destination. Adjust if necessary.
+      // };
+
+      // const sendResponse = await fetch(sendEndpoint, {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(sendPayload),
+      // });
+
+      // if (!sendResponse.ok) {
+      //   const errorData = await sendResponse.json();
+      //   throw new Error(errorData.message || "Failed to send data");
+      // }
+      // If both requests are successful
+      toast({
+        title: "Success",
+        description:
+          "Thank you For Registering for Test Rides, We've sent you an E-Mail with more information. Our team will get in touch shortly",
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: `There was an issue with your submission: ${error.message || "An unknown error occurred"}`,
+      });
+    }
+  };
   return (
     <Form {...form}>
       <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
@@ -134,6 +182,22 @@ export default function TestRideForm() {
               <FormLabel>Mobile Number</FormLabel>
               <FormControl>
                 <Input type="tel" placeholder="Mobile Number" {...field} />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="referralCode"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Mobile Number</FormLabel>
+              <FormControl>
+                <Input
+                  type="tewt"
+                  placeholder="Enter your Referral Code"
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}

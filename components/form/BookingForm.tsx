@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   model: z.enum(["km3000", "km4000", "km5000"]),
@@ -54,6 +55,57 @@ export function BookingForm() {
       couponCode: "",
     },
   });
+
+  // Dynamically load Razorpay script
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      console.log("Razorpay SDK loaded");
+    };
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    console.log(data);
+    // Initialize Razorpay and open the checkout modal
+    if (window.Razorpay) {
+      var options = {
+        key: "YOUR_KEY_ID", // Replace with your key
+        amount: "50000", // Example: 50000 paise = INR 500
+        currency: "INR",
+        name: "Acme Corp",
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: "order_9A33XWu170gUtm",
+        handler: function (response) {
+          alert(`Payment successful: ${response.razorpay_payment_id}`);
+          // Handle further operations after payment success
+        },
+        prefill: {
+          name: data.firstName + " " + data.lastName,
+          email: data.email,
+          contact: data.mobile,
+        },
+        notes: {
+          address: data.addressLine1 + ", " + data.addressLine2,
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      var rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    } else {
+      console.error("Razorpay SDK failed to load");
+    }
+  };
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     console.log(data);

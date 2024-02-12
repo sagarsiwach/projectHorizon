@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -15,7 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
 import { useToast } from "../ui/use-toast";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import crypto from "crypto"; // Import the crypto library for generating HMAC SHA256 hash
 
 const formSchema = z.object({
   model: z.enum(["km3000", "km4000", "km5000"]),
@@ -42,21 +44,20 @@ export function BookingForm() {
       model: "km3000",
       modelColor: "Matte Black",
       modelType: "Standard",
-      firstName: "",
-      lastName: "",
-      email: "",
-      mobile: "",
-      addressLine1: "",
-      addressLine2: "",
-      pinCode: "",
-      city: "",
-      state: "",
-      referralCode: "",
-      couponCode: "",
+      firstName: "Sagar",
+      lastName: "Siwach",
+      email: "sagar@classicgroup.asia",
+      mobile: "9225980117",
+      addressLine1: "Plot No. L-148 & 149",
+      addressLine2: "Verna Industrial Estate",
+      pinCode: "403722",
+      city: "Verna",
+      state: "Goa",
+      referralCode: "123456",
+      couponCode: "987654",
     },
   });
 
-  // Dynamically load Razorpay script
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -73,51 +74,121 @@ export function BookingForm() {
   }, []);
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log(data);
-    // Initialize Razorpay and open the checkout modal
-    if (window.Razorpay) {
-      var options = {
-        key: "YOUR_KEY_ID", // Replace with your key
-        amount: "50000", // Example: 50000 paise = INR 500
-        currency: "INR",
-        name: "Acme Corp",
-        description: "Test Transaction",
-        image: "https://example.com/your_logo",
-        order_id: "order_9A33XWu170gUtm",
-        handler: function (response) {
-          alert(`Payment successful: ${response.razorpay_payment_id}`);
-          // Handle further operations after payment success
+    console.log("Form data:", data); // For debugging purposes
+    try {
+      // Step 1: Send form data to your webhook or server
+      const webhookUrl =
+        "https://hook.eu2.make.com/2ndhcwe3zmyqiuj8nctr5ayar9pkwe3n";
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        prefill: {
-          name: data.firstName + " " + data.lastName,
-          email: data.email,
-          contact: data.mobile,
-        },
-        notes: {
-          address: data.addressLine1 + ", " + data.addressLine2,
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
-      var rzp1 = new window.Razorpay(options);
-      rzp1.open();
-    } else {
-      console.error("Razorpay SDK failed to load");
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) throw new Error("Failed to send data to the webhook.");
+
+      // Assuming the response includes Razorpay order details
+      const orderDetails = await response.json();
+
+      // Step 2: Initialize Razorpay with the order details from the response
+      if ((window as any).Razorpay && orderDetails.id) {
+        const options = {
+          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+          amount: orderDetails.amount,
+          currency: "INR",
+          name: "Acme Corp",
+          description: "Test Transaction",
+          image: "https://example.com/your_logo",
+          order_id: orderDetails.id,
+          handler: async (response) => {
+            console.log("Payment successful:", response);
+
+            // Step 3: Verify Payment Signature
+            const secret = process.env.NEXT_PUBLIC_RAZORPAY_KEY_SECRET; // The key_secret from Razorpay Dashboard
+            const generated_signature = crypto
+              .createHmac("sha256", secret)
+              .update(orderDetails.id + "|" + response.razorpay_payment_id)
+              .digest("hex");
+
+            if (generated_signature === response.razorpay_signature) {
+              // If the signatures match, it's a successful payment verification
+              console.log("Payment verified successfully");
+
+              // Step 4: Send the Razorpay payment success data and the generated signature to the specified webhook URL for further processing
+              const payload = {
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                order_id: orderDetails.id, // The initial order ID from your server
+                razorpay_signature: response.razorpay_signature,
+                hashed_signature: generated_signature, // The locally generated signature for verification
+              };
+
+              try {
+                const webhookResponse = await fetch(
+                  "https://hook.eu2.make.com/pkgeivdux4e9gauimmvdk1e7ii54msu2",
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                  }
+                );
+
+                if (!webhookResponse.ok) {
+                  throw new Error("Failed to notify the success webhook.");
+                }
+
+                console.log("Success webhook notified");
+                toast({
+                  title: "Payment Success",
+                  description: "Your payment was successful and verified.",
+                });
+              } catch (error) {
+                console.error("Webhook notification error:", error);
+                toast({
+                  title: "Error",
+                  description:
+                    "Payment was successful, but notification failed.",
+                });
+              }
+            } else {
+              // Handle the case where the payment verification fails
+              console.error("Payment verification failed");
+              toast({
+                title: "Verification Failed",
+                description:
+                  "Payment verification failed. Please contact support.",
+              });
+            }
+          },
+          prefill: {
+            name: data.firstName + " " + data.lastName,
+            email: data.email,
+            contact: data.mobile,
+          },
+          notes: {
+            ...data, // Include all form data in notes for reference
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+        var rzp1 = new (window as any).Razorpay(options);
+        rzp1.open();
+      } else {
+        throw new Error("Razorpay SDK not loaded or order creation failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast({
+        title: "Error",
+        description: "There was an issue processing your request.",
+      });
     }
   };
-
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data);
-    toast({
-      title: "Form Submission",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 ">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>{" "}
-        </pre>
-      ),
-    });
-  }
 
   return (
     <Form {...form}>

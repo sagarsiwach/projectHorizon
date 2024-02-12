@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "../ui/button";
-import navigationHeader from "./navigationData.json"; // Import the JSON data
 import * as Dialog from "@radix-ui/react-dialog";
 import KMLogoMobile from "./KMLogo";
 import MobileDrawerNavigationItem from "./MobileDrawerNavigationItem";

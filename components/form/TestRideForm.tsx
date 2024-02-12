@@ -22,9 +22,12 @@ const testRideData = [
 
 // Updated schema to include the 'type' field
 const FormSchema = z.object({
-  model: z.enum([...testRideData.map((data) => data.value)], {
-    required_error: "You need to select a Model",
-  }),
+  model: z.enum(
+    [...testRideData.map((data) => data.value)] as [string, ...string[]],
+    {
+      required_error: "You need to select a Model",
+    }
+  ),
   location: z.string().length(6, "Pincode must be 6 digits").optional(),
   name: z.string().min(2).max(40, "Name must be between 2 and 40 characters"),
   email: z.string().email("Must be a valid email"),
@@ -70,28 +73,28 @@ export default function TestRideForm() {
         );
       }
 
-      // // Assuming the second API call depends on the success of the first
-      // const sendEndpoint = "/api/send/";
-      // const sendPayload = {
-      //   model: data.model,
-      //   location: data.location,
-      //   email: data.email,
-      //   mobile: data.mobile,
-      //   referralCode: data.referralCode,
-      //   name: data.name,
-      //   toEmail: data.email, // Assuming the user's email is the destination. Adjust if necessary.
-      // };
+      // Assuming the second API call depends on the success of the first
+      const sendEndpoint = "/api/send/";
+      const sendPayload = {
+        model: data.model,
+        location: data.location,
+        email: data.email,
+        mobile: data.mobile,
+        referralCode: data.referralCode,
+        name: data.name,
+        toEmail: data.email, // Assuming the user's email is the destination. Adjust if necessary.
+      };
 
-      // const sendResponse = await fetch(sendEndpoint, {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(sendPayload),
-      // });
+      const sendResponse = await fetch(sendEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(sendPayload),
+      });
 
-      // if (!sendResponse.ok) {
-      //   const errorData = await sendResponse.json();
-      //   throw new Error(errorData.message || "Failed to send data");
-      // }
+      if (!sendResponse.ok) {
+        const errorData = await sendResponse.json();
+        throw new Error(errorData.message || "Failed to send data");
+      }
       // If both requests are successful
       toast({
         title: "Success",
@@ -194,7 +197,7 @@ export default function TestRideForm() {
               <FormLabel>Mobile Number</FormLabel>
               <FormControl>
                 <Input
-                  type="tewt"
+                  type="text"
                   placeholder="Enter your Referral Code"
                   {...field}
                 />

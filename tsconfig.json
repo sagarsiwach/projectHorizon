@@ -12,6 +12,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "noEmitOnError": true,
+
     "incremental": true,
     "target": "ES2022",
 

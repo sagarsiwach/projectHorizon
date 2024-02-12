@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export default function FooterNavigation({ data }) {
-  console.log(data.navigationLinks[0].subNavigationLinks[0]);
   // Removed the console.log for cleaner code unless it's needed for debugging
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-2 gap-y-4 text-neutral-300">

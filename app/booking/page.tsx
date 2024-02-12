@@ -1,5 +1,6 @@
 "use client";
 import { BookingForm } from "@/components/form/BookingForm";
+import React from "react";
 
 export default function BookingPage() {
   return (

@@ -77,8 +77,7 @@ export function BookingForm() {
     console.log("Form data:", data); // For debugging purposes
     try {
       // Step 1: Send form data to your webhook or server
-      const webhookUrl =
-        "https://hook.eu2.make.com/2ndhcwe3zmyqiuj8nctr5ayar9pkwe3n";
+      const webhookUrl = process.env.RAZORPAY_ORDER_WEBHOOK_URL;
       const response = await fetch(webhookUrl, {
         method: "POST",
         headers: {

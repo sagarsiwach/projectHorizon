@@ -30,13 +30,6 @@ export const TestRideEmail = ({
     <Preview>Thank you for Registering your Test Ride</Preview>
     <Body style={main}>
       <Container style={container}>
-        <Img
-          src={`${baseUrl}/static/km-logo.png`}
-          width="258"
-          height="56"
-          alt="Kabira Mobility"
-          style={logo}
-        />
         <Heading style={heading}>
           Thank you for registering for test ride
         </Heading>

@@ -74,10 +74,12 @@ export function BookingForm() {
   }, []);
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log("Form data:", data); // For debugging purposes
+    console.log("1. Form data:", data); // For debugging purposes
     try {
       // Step 1: Send form data to your webhook or server
-      const webhookUrl = process.env.NEXT_PUBLIC_RAZORPAY_ORDER_WEBHOOK_URL;
+      const webhookUrl =
+        "https://hook.eu2.make.com/2ndhcwe3zmyqiuj8nctr5ayar9pkwe3n";
+      console.log("2. Sending data to webhook:", webhookUrl);
       const response = await fetch(webhookUrl, {
         method: "POST",
         headers: {
@@ -90,78 +92,51 @@ export function BookingForm() {
 
       // Assuming the response includes Razorpay order details
       const orderDetails = await response.json();
+      console.log("3. Received order details from webhook:", orderDetails);
 
       // Step 2: Initialize Razorpay with the order details from the response
-      if ((window as any).Razorpay && orderDetails.id) {
+      if (window.Razorpay && orderDetails.id) {
+        console.log("4. Initializing Razorpay with order details");
         const options = {
-          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+          key: "rzp_live_iSiMwZzBW6FkP8",
           amount: orderDetails.amount,
           currency: "INR",
-          name: "Acme Corp",
-          description: "Test Transaction",
-          image: "https://example.com/your_logo",
+          name: "Kabira Mobility Private Limited",
+          description: "Pre-Book KM3000 and KM4000",
+          image:
+            "https://ik.imagekit.io/kabiramobility/Vector_r3CcwZ5a4.png?updatedAt=1707891960941",
           order_id: orderDetails.id,
           handler: async (response) => {
-            console.log("Payment successful:", response);
+            console.log("5. Payment successful:", response);
 
-            // Step 3: Verify Payment Signature
-            const secret = process.env.RAZORPAY_KEY_SECRET; // The key_secret from Razorpay Dashboard
-            const generated_signature = crypto
-              .createHmac("sha256", secret)
-              .update(orderDetails.id + "|" + response.razorpay_payment_id)
-              .digest("hex");
+            // Step 3: Send payment data to the webhook
+            console.log("6. Sending payment data to webhook");
+            const payload = {
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              order_id: orderDetails.id, // The initial order ID from your server
+              razorpay_signature: response.razorpay_signature,
+            };
 
-            if (generated_signature === response.razorpay_signature) {
-              // If the signatures match, it's a successful payment verification
-              console.log("Payment verified successfully");
+            const webhookUrl =
+              "https://hook.eu2.make.com/pkgeivdux4e9gauimmvdk1e7ii54msu2";
+            const webhookResponse = await fetch(webhookUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payload),
+            });
 
-              // Step 4: Send the Razorpay payment success data and the generated signature to the specified webhook URL for further processing
-              const payload = {
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_order_id: response.razorpay_order_id,
-                order_id: orderDetails.id, // The initial order ID from your server
-                razorpay_signature: response.razorpay_signature,
-                hashed_signature: generated_signature, // The locally generated signature for verification
-              };
-
-              try {
-                const webhookResponse = await fetch(
-                  "https://hook.eu2.make.com/pkgeivdux4e9gauimmvdk1e7ii54msu2",
-                  {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(payload),
-                  }
-                );
-
-                if (!webhookResponse.ok) {
-                  throw new Error("Failed to notify the success webhook.");
-                }
-
-                console.log("Success webhook notified");
-                toast({
-                  title: "Payment Success",
-                  description: "Your payment was successful and verified.",
-                });
-              } catch (error) {
-                console.error("Webhook notification error:", error);
-                toast({
-                  title: "Error",
-                  description:
-                    "Payment was successful, but notification failed.",
-                });
-              }
-            } else {
-              // Handle the case where the payment verification fails
-              console.error("Payment verification failed");
-              toast({
-                title: "Verification Failed",
-                description:
-                  "Payment verification failed. Please contact support.",
-              });
+            if (!webhookResponse.ok) {
+              throw new Error("Failed to notify the webhook.");
             }
+
+            console.log("7. Webhook notified");
+            toast({
+              title: "Payment Success",
+              description: "Your payment was successful.",
+            });
           },
 
           prefill: {
@@ -176,13 +151,13 @@ export function BookingForm() {
             color: "#3399cc",
           },
         };
-        var rzp1 = new (window as any).Razorpay(options);
+        var rzp1 = new Razorpay(options);
         rzp1.open();
       } else {
         throw new Error("Razorpay SDK not loaded or order creation failed");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("8. Error:", error);
       toast({
         title: "Error",
         description: "There was an issue processing your request.",

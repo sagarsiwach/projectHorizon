@@ -14,10 +14,10 @@ export default function Navigation({ navigation }) {
         <div className="flex flex-col px-4 w-dvw">
           <div className="flex flex-row justify-between w-full items-center relative  py-4">
             <KMLogo />
-            <MobileDrawer data={navigation} />
-            <DesktopProductBar data={navigation} />
-            <DesktopDrawer data={navigation} />
-            <TestRideButton />
+            {/* <MobileDrawer data={navigation} /> */}
+            {/* <DesktopProductBar data={navigation} /> */}
+            {/* <DesktopDrawer data={navigation} /> */}
+            {/* <TestRideButton /> */}
           </div>
           <div>
             {" "}
@@ -28,7 +28,7 @@ export default function Navigation({ navigation }) {
           </div>
         </div>
       </div>
-      <BottomFooterBar />
+      {/* <BottomFooterBar /> */}
     </AnimatePresence>
   );
 }

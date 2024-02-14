@@ -8,35 +8,50 @@ import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "next/navigation";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
+  FormMessage,
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
 import * as RadioGroup from "@radix-ui/react-radio-group";
+import Image from "next/image";
 const testRideData = [
-  { id: "r1", value: "km3000", name: "KM3000" },
-  { id: "r2", value: "km4000", name: "KM4000" },
-  { id: "r3", value: "km5000", name: "KM5000" },
+  {
+    id: "r1",
+    value: "km3000",
+    name: "KM3000",
+    image: "/test-ride/KM3000.png",
+    alt: "KM3000",
+  },
+  {
+    id: "r2",
+    value: "km4000",
+    name: "KM4000",
+    image: "/test-ride/KM4000.png",
+    alt: "KM4000",
+  },
 ];
 
 // Updated schema to include the 'type' field
 const FormSchema = z.object({
-  model: z.enum(
-    [...testRideData.map((data) => data.value)] as [string, ...string[]],
-    {
-      required_error: "You need to select a Model",
-    }
-  ),
+  model: z.string({
+    required_error: "Please select the model.",
+  }),
   location: z.string().length(6, "Pincode must be 6 digits").optional(),
   name: z.string().min(2).max(40, "Name must be between 2 and 40 characters"),
   email: z.string().email("Must be a valid email"),
   mobile: z.string().length(10, "Mobile number must be 10 digits"),
-  referralCode: z
-    .string()
-    .length(6, "Referral code must be 6 digits")
-    .optional(),
 });
 
 export default function TestRideForm() {
@@ -49,7 +64,7 @@ export default function TestRideForm() {
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      model: testRideData[0].value, // Default to the first model
+      model: "km3000",
       location: "",
       name: "",
       email: "",
@@ -81,7 +96,6 @@ export default function TestRideForm() {
         location: data.location,
         email: data.email,
         mobile: data.mobile,
-        referralCode: data.referralCode,
         name: data.name,
         toEmail: data.email, // Assuming the user's email is the destination. Adjust if necessary.
       };
@@ -102,6 +116,11 @@ export default function TestRideForm() {
         description:
           "Thank you For Registering for Test Rides, We've sent you an E-Mail with more information. Our team will get in touch shortly",
       });
+
+      // Redirect after a short delay to allow the toast to be visible
+      setTimeout(() => {
+        window.location.href = "https://www.kabiramobility.com";
+      }, 2000);
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
@@ -110,66 +129,73 @@ export default function TestRideForm() {
       });
     }
   };
+
   return (
     <Form {...form}>
-      <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
-        {/* Model Selection */}
+      <form
+        className="grid gap-4 mx-auto"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         <FormField
           control={form.control}
           name="model"
           render={({ field }) => (
-            <FormItem className="space-y-2">
-              <FormLabel>Choose Your Model</FormLabel>
-              <RadioGroup.Root {...field} className="flex flex-col">
-                {testRideData.map((option) => (
-                  <RadioGroup.Item
-                    key={option.id}
-                    value={option.value}
-                    id={option.id}
-                  >
-                    {option.name}
-                  </RadioGroup.Item>
-                ))}
-              </RadioGroup.Root>
-            </FormItem>
-          )}
-        />
-
-        {/* Location */}
-        <FormField
-          name="location"
-          control={form.control}
-          render={({ field }) => (
             <FormItem>
-              <FormLabel>Where Are You Located</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="Pincode" {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
-        {/* Name */}
-        <FormField
-          name="name"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>What Should We Call You?</FormLabel>
-              <FormControl>
-                <Input type="text" placeholder="Your Name" {...field} />
-              </FormControl>
+              <FormLabel className="text-lg tracking-tighter text-neutral-500 font-medium">
+                Please select your model
+              </FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choose your Model" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="KM3000">KM3000</SelectItem>
+                  <SelectItem value="KM4000">KM4000</SelectItem>
+                </SelectContent>
+              </Select>
             </FormItem>
           )}
         />
 
         {/* Email */}
         <FormField
+          name="location"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-lg tracking-tighter text-neutral-500 font-medium">
+                Please Enter your Pincode
+              </FormLabel>
+              <FormControl>
+                <Input type="input" placeholder="403722" {...field} />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          name="name"
+          control={form.control}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-lg tracking-tighter text-neutral-500 font-medium">
+                What is your Name?
+              </FormLabel>
+              <FormControl>
+                <Input type="input" placeholder="Jane Doe" {...field} />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
           name="email"
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>E-Mail Address</FormLabel>
+              <FormLabel className="text-lg tracking-tighter text-neutral-500 font-medium">
+                E-Mail Address
+              </FormLabel>
               <FormControl>
                 <Input type="email" placeholder="Email" {...field} />
               </FormControl>
@@ -183,30 +209,15 @@ export default function TestRideForm() {
           control={form.control}
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Mobile Number</FormLabel>
+              <FormLabel className="text-lg tracking-tighter text-neutral-500 font-medium">
+                Mobile Number
+              </FormLabel>
               <FormControl>
                 <Input type="tel" placeholder="Mobile Number" {...field} />
               </FormControl>
             </FormItem>
           )}
         />
-        <FormField
-          name="referralCode"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Mobile Number</FormLabel>
-              <FormControl>
-                <Input
-                  type="text"
-                  placeholder="Enter your Referral Code"
-                  {...field}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
         <Button type="submit">Submit</Button>
       </form>
     </Form>

@@ -75,46 +75,26 @@ export default function TestRideForm() {
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const formEndpoint = "/api/form/";
-      const formResponse = await fetch(formEndpoint, {
+      const webhookEndpoint =
+        "https://hook.eu2.make.com/m8lfybxkhmbkbp82tv4ex93bhdfx6ocq";
+      const webhookResponse = await fetch(webhookEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
-      if (!formResponse.ok) {
-        const errorData = await formResponse.json();
+      if (!webhookResponse.ok) {
+        const errorData = await webhookResponse.json();
         throw new Error(
           errorData.message || "Failed to submit test ride request"
         );
       }
 
-      // Assuming the second API call depends on the success of the first
-      const sendEndpoint = "/api/send/";
-      const sendPayload = {
-        model: data.model,
-        location: data.location,
-        email: data.email,
-        mobile: data.mobile,
-        name: data.name,
-        toEmail: data.email, // Assuming the user's email is the destination. Adjust if necessary.
-      };
-
-      const sendResponse = await fetch(sendEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(sendPayload),
-      });
-
-      if (!sendResponse.ok) {
-        const errorData = await sendResponse.json();
-        throw new Error(errorData.message || "Failed to send data");
-      }
-      // If both requests are successful
+      // If the request is successful
       toast({
         title: "Success",
         description:
-          "Thank you For Registering for Test Rides, We've sent you an E-Mail with more information. Our team will get in touch shortly",
+          "Thank you for registering for test rides. We've sent you an email with more information. Our team will get in touch shortly.",
       });
 
       // Redirect after a short delay to allow the toast to be visible

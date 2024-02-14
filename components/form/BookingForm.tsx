@@ -77,7 +77,7 @@ export function BookingForm() {
     console.log("Form data:", data); // For debugging purposes
     try {
       // Step 1: Send form data to your webhook or server
-      const webhookUrl = process.env.RAZORPAY_ORDER_WEBHOOK_URL;
+      const webhookUrl = process.env.NEXT_PUBLIC_RAZORPAY_ORDER_WEBHOOK_URL;
       const response = await fetch(webhookUrl, {
         method: "POST",
         headers: {
@@ -105,7 +105,7 @@ export function BookingForm() {
             console.log("Payment successful:", response);
 
             // Step 3: Verify Payment Signature
-            const secret = process.env.NEXT_PUBLIC_RAZORPAY_KEY_SECRET; // The key_secret from Razorpay Dashboard
+            const secret = process.env.RAZORPAY_KEY_SECRET; // The key_secret from Razorpay Dashboard
             const generated_signature = crypto
               .createHmac("sha256", secret)
               .update(orderDetails.id + "|" + response.razorpay_payment_id)
@@ -163,6 +163,7 @@ export function BookingForm() {
               });
             }
           },
+
           prefill: {
             name: data.firstName + " " + data.lastName,
             email: data.email,

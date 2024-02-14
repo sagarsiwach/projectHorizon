@@ -120,7 +120,7 @@ export default function TestRideForm() {
       // Redirect after a short delay to allow the toast to be visible
       setTimeout(() => {
         window.location.href = "https://www.kabiramobility.com";
-      }, 2000);
+      }, 1000);
     } catch (error) {
       console.error("Error submitting form:", error);
       toast({
